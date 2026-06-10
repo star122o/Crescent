@@ -26,25 +26,23 @@ crescent/
 - **Toolchain**: **Nightly Rust required** (due to `azalea` Minecraft framework and SIMD dependencies).
 - **Role**: Implements the main Minecraft bot logic and behaviors using the `azalea` framework.
 - **Features**:
-  - `desktop-binding`: Enables `napi` and `napi-derive` dependencies to build bindings for the Node.js / Electron desktop application.
-  - `mobile-binding`: Enables `uniffi` dependency to build bindings for the Expo mobile application.
-  - `azalea`: Enables the underlying Minecraft bot functionality.
+  - `node-binding`: Enables `napi` and `napi-derive` dependencies to build bindings for the Node.js / Electron desktop application.
+  - `native-binding`: Enables `uniffi` dependency to build bindings for the Expo mobile application.
 - **Build / Check Commands**:
   - Check (default): `cargo check`
-  - Check with Azalea: `cargo +nightly check --features azalea`
-  - Check Desktop Bindings: `cargo +nightly check --features desktop-binding,azalea`
-  - Check Mobile Bindings: `cargo +nightly check --features mobile-binding,azalea`
+  - Check Node Bindings: `cargo +nightly check --features node-binding`
+  - Check Native Bindings: `cargo +nightly check --features native-binding`
 
 ### 2. Desktop (`apps/desktop/`)
 - **Environment**: Node.js, TypeScript, `pnpm`
 - **Frontend Stack**: React, Vite, TailwindCSS
 - **Shell**: Electron
-- **Integration**: Accesses the core Rust engine through native Node.js addons built via **`napi`** (leveraging the `desktop-binding` feature of the `core` library).
+- **Integration**: Accesses the core Rust engine through native Node.js addons built via **`napi`** (leveraging the `node-binding` feature of the `core` library).
 
 ### 3. Mobile (`apps/mobile/`)
 - **Environment**: Node.js, TypeScript, `pnpm`
 - **Framework**: Expo / React Native
-- **Integration**: Accesses the core Rust engine through foreign-language interface (FFI) bindings generated via **`uniffi`** (leveraging the `mobile-binding` feature of the `core` library).
+- **Integration**: Accesses the core Rust engine through foreign-language interface (FFI) bindings generated via **`uniffi`** (leveraging the `native-binding` feature of the `core` library).
 
 ---
 

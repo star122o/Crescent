@@ -1,5 +1,7 @@
 [workspace]
 members = [
-  "core"
+  "core",
+  "protocol",
+  "auth"
 ]
 resolver = "2"

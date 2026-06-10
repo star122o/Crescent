@@ -1,0 +1,31 @@
+[package]
+name = "crescent-core"
+version = "0.1.0"
+edition = "2024"
+
+[lib]
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[dependencies]
+crescent-auth = { path = "../auth" }
+crescent-protocol = { path = "../protocol" }
+reqwest = { version = "0.13.4", default-features = false, features = ["json", "rustls", "form"] }
+tokio = { version = "1.52.3", features = ["full"] }
+uuid = { version = "1.0", features = ["serde"] }
+
+# Node binding
+napi = { version = "3.9.1", default-features = false, features = ["napi10", "tokio_rt"], optional = true }
+napi-derive = { version = "3.5.6", optional = true }
+
+# Native binding
+uniffi = { version = "0.31.1", features = ["tokio"], optional = true }
+
+[features]
+node-binding = ["dep:napi", "dep:napi-derive"]
+native-binding = ["dep:uniffi"]
+
+[profile.release]
+opt-level = "z"
+lto = true
+codegen-units = 1
+panic = "abort"
